@@ -1,0 +1,163 @@
+
+// import { Test } from '@nestjs/testing';
+// import { CityController } from './city.controller';
+// import { CityService } from './city.service';
+
+// describe('CityController', () => {
+//   let cityController: CityController;
+//   let cityService: CityService;
+
+//   beforeEach(async () => {
+//     const moduleRef = await Test.createTestingModule({
+//         controllers: [CityController],
+//         providers: [CityService],
+//       }).compile();
+
+//     cityService = moduleRef.get<CityService>(CityService);
+//     cityController = moduleRef.get<CityController>(CityController);
+//   });
+
+  /*describe('findAll', () => {
+    it('should return an array of cats', async () => {
+      const result = ['test'];
+      jest.spyOn(catsService, 'findAll').mockImplementation(() => result);
+
+      expect(await catsController.findAll()).toBe(result);
+    });
+  });*/
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*import { Test, TestingModule } from '@nestjs/testing';
+import { CityService } from './city.service';
+import { getModelToken } from '@nestjs/mongoose';
+import { HttpService } from '@nestjs/axios';
+import { of } from 'rxjs';
+
+// Mock City model
+const mockCityModel = {
+  find: jest.fn().mockResolvedValue([{ name: 'Mumbai' }, { name: 'London' }]),
+  create: jest.fn().mockImplementation(city => Promise.resolve({ ...city })),
+};
+
+// Mock HttpService
+const mockHttpService = {
+  get: jest.fn(() => ({
+    pipe: jest.fn(() => ({
+      toPromise: jest.fn(() => Promise.resolve({ data: {} })),
+    })),
+  })),
+};
+
+describe('CityService', () => {
+  let service: CityService;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        CityService,
+        { provide: getModelToken('City'), useValue: mockCityModel },
+        { provide: HttpService, useValue: mockHttpService },
+      ],
+    }).compile();
+
+    service = module.get<CityService>(CityService);
+  });
+
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
+
+  describe('getAllCities', () => {
+    it('should return an array of cities', async () => {
+      const cities = await service.getAllCities();
+      expect(cities).toEqual([{ name: 'Mumbai' }, { name: 'London' }]);
+    });
+  });
+
+  describe('createCity', () => {
+    it('should create a new city', async () => {
+      const newCity = await service.createCity({ name: 'New City' });
+      expect(newCity).toEqual({ name: 'New City' });
+    });
+  });
+
+  describe('getWeather', () => {
+    it('should fetch weather data for each city', async () => {
+      await service.getWeather();
+      expect(mockHttpService.get).toHaveBeenCalledTimes(2); 
+      expect(mockHttpService.get).toHaveBeenCalledWith('http://api.openweathermap.org/data/2.5/weather?q=Mumbai&appid=23c234ed4201da818aa859f3c786c4f4');
+      expect(mockHttpService.get).toHaveBeenCalledWith('http://api.openweathermap.org/data/2.5/weather?q=London&appid=23c234ed4201da818aa859f3c786c4f4');
+    });
+  });
+});
+*/
