@@ -27,80 +27,34 @@ export class CityService {
     const cities = await this.getAllCities();
     console.log(cities);
 
-    const weatherData = []; // Array to store city names and temperatures
-    
-    // Iterate over each city and fetch weather data
-    for (const city of cities) {
-      const url = `http://api.openweathermap.org/data/2.5/weather?q=${city.name}&appid=${process.env.APP_ID}&units=metric`;
-    
-      try {
-        const response = await axios.get(url);
-        const temperature = response.data.main.temp;
-        console.log(`Temperature for ${city.name}: ${temperature}°C`);
-        weatherData.push({ city: city.name, temperature }); // Push city name and temperature to array
-      } catch (error) {
-        console.error(`Error fetching weather data for ${city.name}: ${error.message}`);
-        // Omit this city from the weather data array if an error occurs
-      }
+    const weatherData = []; 
+    if (cities && cities.length > 0) {
+       
+        const promises = cities.map(async (city) => {
+            const url = `http://api.openweathermap.org/data/2.5/weather?q=${city.name}&appid=${process.env.APP_ID}&units=metric`;
 
+            try {
+                const response = await axios.get(url);
+                const temperature = response.data.main.temp;
+                console.log(`Temperature for ${city.name}: ${temperature}°C`);
+                weatherData.push({ city: city.name, temperature });
+            } catch (error) {
+                console.error(`Error fetching weather data for ${city.name}: ${error.message}`);
+                
+            }
+        });
 
-    // const weatherData = await Promise.all(weatherDataPromises);
-    // return weatherDataPromises;
-  }
-  return weatherData;
+        await Promise.all(promises);
+    } else {
+        console.error("No cities found or cities array is empty.");
+    }
+
+    return weatherData;
+}
 
 }
-}
 
 
 
-
-    // console.log("CALLED")
-  //   const cities = await this.getAllCities();
-  //   console.log(cities)
-  //   const weatherDataPromises = cities.map( async city =>{
-
-  //     const url = `http://api.openweathermap.org/data/2.5/weather?q=${city.name}&appid=${process.env.APP_ID}&units=metric`;
-  //     const temp =  await  axios.get(url)
-  //     .then(response => {
-        
-  //       const temperature = response.data.main.temp;
-  //       console.log(temperature);
-  //       return temperature;
-  //     })});
-
-  //     return weatherDataPromises;
-  //   }
-  // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //   console.log(city.name);
-    //  const some =  this.httpService
-    //   .get(`http://api.openweathermap.org/data/2.5/weather?q=${city.name}&appid=${process.env.APP_ID}&units=metric`)
-      
-
-    //   return {
-    //     Temperature: some.data.main.temp,
-    //   };
-    
-
-    // const weatherData = await Promise.all(weatherDataPromises);
 
  

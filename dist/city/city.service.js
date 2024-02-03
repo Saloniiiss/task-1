@@ -35,7 +35,7 @@ let CityService = class CityService {
         const cities = await this.getAllCities();
         console.log(cities);
         const weatherData = [];
-        for (const city of cities) {
+        const promises = cities.map(async (city) => {
             const url = `http://api.openweathermap.org/data/2.5/weather?q=${city.name}&appid=${process.env.APP_ID}&units=metric`;
             try {
                 const response = await axios_1.default.get(url);
@@ -46,7 +46,8 @@ let CityService = class CityService {
             catch (error) {
                 console.error(`Error fetching weather data for ${city.name}: ${error.message}`);
             }
-        }
+        });
+        await Promise.all(promises);
         return weatherData;
     }
 };
